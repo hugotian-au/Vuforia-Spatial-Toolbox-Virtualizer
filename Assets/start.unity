@@ -3128,7 +3128,7 @@ MonoBehaviour:
     type: 2}
   camerasReady: 0
   broadcastSkeletonData: 1
-  primaryTrackerIndex: 1
+  primaryTrackerIndex: 0
   color_resolution: 2
   depth_mode: 2
   fps_mode: 1
