@@ -110,10 +110,41 @@ public class Pusher : MonoBehaviour {
     float lastGarbageTime = 0.0f;
     public float fps = 1.0f;
     // Update is called once per frame
+    private bool isRightButtonDown=false;
+    private Vector3 lastMousePosition = Vector3.zero;
     void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ToggleDemoMode();
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("Mouse down:" + Input.mousePosition);
+            isRightButtonDown = true;
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            Debug.Log("Mouse up:" + Input.mousePosition);
+            isRightButtonDown = false;
+            lastMousePosition = Vector3.zero; //Should be cleaned to zero, else it will drift.
+
+        }
+        if (isRightButtonDown)
+        {
+            Vector2 mousePos = new Vector2();
+            if (lastMousePosition != Vector3.zero)
+            {
+                Debug.Log("Input.mousePosition:" + Input.mousePosition);
+                Debug.Log("lastMousePosition is " + lastMousePosition);
+                mousePos.x = Input.mousePosition.x;
+                mousePos.y = Input.mousePosition.y;
+                Vector3 offset = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane)) - lastMousePosition;
+                cam.transform.localPosition += offset * 10;
+                Debug.Log("offset: " + offset);
+            }
+            lastMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+            Debug.Log("lastMousePosition after is " + lastMousePosition);
+
         }
 		if(Time.time - lastTime > 1.0f/fps)
         {
