@@ -152,16 +152,20 @@ public class Pusher : MonoBehaviour {
             MousePositionLast = Vector2.zero;
         }
 
-        MousePositionLast = MousePositionNew;
-        Debug.Log("MousePositionLast: " + MousePositionLast);
-        MousePositionNew = Input.mousePosition;
-        Debug.Log("MousePositionNew: " + MousePositionNew);
-        MouseMoveDirection = MousePositionNew - MousePositionLast;
-        Debug.Log("MouseMoveDirection: " + MouseMoveDirection);
-
         unprocessedScrollDY += Input.GetAxis("Mouse ScrollWheel");
-        unprocessedMouseDX += MouseMoveDirection.x;
-        unprocessedMouseDX += MouseMoveDirection.y;
+        Debug.Log("unprocessedScrollDY:" + unprocessedScrollDY);
+        if(isRightButtonDown)
+        {
+            MousePositionLast = MousePositionNew;
+            Debug.Log("MousePositionLast: " + MousePositionLast);
+            MousePositionNew = Input.mousePosition;
+            Debug.Log("MousePositionNew: " + MousePositionNew);
+            MouseMoveDirection = MousePositionNew - MousePositionLast;
+            Debug.Log("MouseMoveDirection: " + MouseMoveDirection);
+
+            unprocessedMouseDX += MouseMoveDirection.x;
+            unprocessedMouseDX += MouseMoveDirection.y;
+        }
 
         Vector3 cameraVelocity = Vector3.zero;
         Vector3 cameraTargetVelocity = Vector3.zero;
@@ -306,6 +310,7 @@ public class Pusher : MonoBehaviour {
         upPoint.transform.forward = cam.transform.position - upPoint.transform.position;
 
         Quaternion camRotation = Quaternion.LookRotation(forwardVec, upVec);
+        
 
         string testId = "test";
         // divide by 1000 because toolbox uses mm not meters. store in cameraInfo list and render later so that multiple clients don't conflict
