@@ -314,7 +314,7 @@ public class Pusher : MonoBehaviour {
 
         string testId = "test";
         // divide by 1000 because toolbox uses mm not meters. store in cameraInfo list and render later so that multiple clients don't conflict
-        cameraInfo[testId] = new CameraInformation(new Vector3(camPos.x / 1000.0f, camPos.y / 1000.0f, camPos.z / 1000.0f), camRotation);
+        // cameraInfo[testId] = new CameraInformation(new Vector3(camPos.x / 1000.0f, camPos.y / 1000.0f, camPos.z / 1000.0f), camRotation);
         // Vector3 offset = Camera.main.ScreenToWorldPoint(new Vector3(MouseMoveDirection.x, MouseMoveDirection.y, Camera.main.nearClipPlane));
         // offset *= 10;
         // Vector3 offset2 = new Vector3(0.0f, 0.0f, 0.0f);
